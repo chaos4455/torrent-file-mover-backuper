@@ -22,10 +22,21 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install pyinstaller
+        pip install pillow
+
+    - name: Convert PNG to ICO
+      run: |
+        python -c "
+import os
+from PIL import Image
+
+img = Image.open('torrent.icon.png')
+img.save('torrent.icon.ico')
+        "
 
     - name: Create executável
       run: |
-        pyinstaller --onefile --windowed --icon=torrent-icon.png py-torrent-file-mover.py
+        pyinstaller --onefile --windowed --icon=torrent-icon.ico py-torrent-file-mover.py
 
     - name: Create program folder if not exists
       run: mkdir programas
@@ -34,7 +45,9 @@ jobs:
       run: move dist\py-torrent-file-mover.exe programas\
 
     - name: Remove dist folder from commit
-      run: git rm -r --cached dist
+      run: |
+        git rm -r --cached dist
+        git commit -m "Remove dist folder from commit"
 
     - name: Commit changes
       run: |
@@ -53,3 +66,4 @@ jobs:
         rmdir /s /q dist
         rmdir /s /q build
         del py-torrent-file-mover.spec
+        del torrent.icon.ico
