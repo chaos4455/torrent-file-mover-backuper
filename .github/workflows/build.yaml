@@ -18,9 +18,12 @@ jobs:
       with:
         python-version: '3.x'
 
-    - name: Install Dependencies
+    - name: Upgrade pip
       run: |
         python -m pip install --upgrade pip
+
+    - name: Install PyInstaller
+      run: |
         pip install pyinstaller
 
     - name: Create Executable
@@ -39,25 +42,21 @@ jobs:
       run: |
         git add programas
 
-    - name: Commit Changes
+    - name: Configure Git User
       run: |
         git config --local user.email 'github-actions[bot]@users.noreply.github.com'
         git config --local user.name 'github-actions[bot]'
+
+    - name: Commit Changes
+      run: |
         git commit -m "Add new version of executável"
+
+    - name: Push Changes
+      run: |
+        git push origin main
 
     - name: Upload Executable
       uses: actions/upload-artifact@v2
       with:
         name: python-torrent-file-mover-backup-v01.exe
         path: programas\\py-torrent-file-mover.exe
-
-    - name: Clean Up Dist and Build
-      run: |
-        rmdir /s /q dist
-        rmdir /s /q build
-        del py-torrent-file-mover.spec
-
-    - name: Delete All Files in Root Directory
-      run: |
-        Remove-Item -Recurse -Force * 
-        Remove-Item -Recurse -Force .* 2> $null || Write-Host "Some hidden files or folders cannot be deleted"
