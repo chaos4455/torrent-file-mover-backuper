@@ -34,20 +34,14 @@ jobs:
     - name: Move executável
       run: move dist\\py-torrent-file-mover.exe programas\\
 
-    - name: Set git identity
+    - name: Check if dist folder exists
       run: |
-        git config --global user.name 'github-actions[bot]'
-        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-
-    - name: Remove dist folder from commit
-      run: |
-        if (Test-Path -Path "dist") {
-          git rm -r --cached dist
-          git commit -m "Remove dist folder from commit"
-        }
+        if (Test-Path -Path "dist") { git rm -r --cached dist }
 
     - name: Commit changes
       run: |
+        git config --local user.email 'github-actions[bot]@users.noreply.github.com'
+        git config --local user.name 'github-actions[bot]'
         git add .
         git commit -m "Add new version of executável"
 
