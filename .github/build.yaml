@@ -1,1 +1,55 @@
+name: Deploy Py to Exe
 
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pyinstaller
+
+    - name: Create executável
+      run: |
+        pyinstaller --onefile --windowed --icon=torrent.icon.png py-torrent-file-mover.py
+
+    - name: Create program folder if not exists
+      run: mkdir programas
+
+    - name: Move executável
+      run: move dist\py-torrent-file-mover.exe programas\
+
+    - name: Remove dist folder from commit
+      run: git rm -r --cached dist
+
+    - name: Commit changes
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+        git commit -m "Add new version of executável"
+
+    - name: Upload executável
+      uses: actions/upload-artifact@v2
+      with:
+        name: python-torrent-file-mover-backup-v01.exe
+        path: programas\py-torrent-file-mover.exe
+
+    - name: Clean up
+      run: |
+        rmdir /s /q dist
+        rmdir /s /q build
+        del py-torrent-file-mover.spec
