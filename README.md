@@ -87,8 +87,6 @@ Neste repositório, utilizamos **GitHub Actions** para implementar práticas de 
 
 ### 🔄 Etapas do Workflow
 
-```mermaid
-
     A[🔍 Checkout Repository] --> B[🐍 Set Up Python]
     B --> C[⬆️ Upgrade pip]
     C --> D[📦 Install PyInstaller]
@@ -101,7 +99,6 @@ Neste repositório, utilizamos **GitHub Actions** para implementar práticas de 
     J --> K[🔼 Push Changes]
     K --> L[📤 Upload Executable]
     L --> M[✅ Build Complete!]
-```
 
 ```yaml
 name: Deploy Py to Exe
