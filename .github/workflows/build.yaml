@@ -10,54 +10,54 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - name: Checkout repository
+    - name: Checkout Repository
       uses: actions/checkout@v2
 
-    - name: Set up Python
+    - name: Set Up Python
       uses: actions/setup-python@v2
       with:
         python-version: '3.x'
 
-    - name: Install dependencies
+    - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
         pip install pyinstaller
 
-    - name: Create executável
+    - name: Create Executable
       run: |
         pyinstaller --onefile --windowed --icon=torrent-icon.ico py-torrent-file-mover.py
 
-    - name: Create program folder if not exists
+    - name: Create Program Folder if Not Exists
       run: |
         if (-Not (Test-Path -Path "programas")) { New-Item -ItemType Directory -Path "programas" }
 
-    - name: Move executável
-      run: move dist\\py-torrent-file-mover.exe programas\\
-
-    - name: Check if dist folder exists
+    - name: Move Executable to Programas Folder
       run: |
-        if (Test-Path -Path "dist") { git rm -r --cached dist }
+        move dist\\py-torrent-file-mover.exe programas\\
 
-    - name: Commit changes
+    - name: Add Programas Folder Changes
+      run: |
+        git add programas
+
+    - name: Commit Changes
       run: |
         git config --local user.email 'github-actions[bot]@users.noreply.github.com'
         git config --local user.name 'github-actions[bot]'
-        git add .
         git commit -m "Add new version of executável"
 
-    - name: Upload executável
+    - name: Upload Executable
       uses: actions/upload-artifact@v2
       with:
         name: python-torrent-file-mover-backup-v01.exe
         path: programas\\py-torrent-file-mover.exe
 
-    - name: Clean up
+    - name: Clean Up Dist and Build
       run: |
         rmdir /s /q dist
         rmdir /s /q build
         del py-torrent-file-mover.spec
 
-    - name: Delete all files in root directory
+    - name: Delete All Files in Root Directory
       run: |
         Remove-Item -Recurse -Force * 
         Remove-Item -Recurse -Force .* 2> $null || Write-Host "Some hidden files or folders cannot be deleted"
