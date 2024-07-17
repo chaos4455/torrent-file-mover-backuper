@@ -73,3 +73,99 @@ for filename in os.listdir(source_folder):
         print(f'Movido: {filename} para {destination_folder}')
 
 print('Todos os arquivos .torrent foram movidos com sucesso!')
+
+```
+## 🛠️ CI/CD com GitHub Actions
+
+Neste repositório, utilizamos **GitHub Actions** para implementar práticas de **DevOps** e **CI/CD** (Integração Contínua/Entrega Contínua). Abaixo está a configuração da ação que automatiza o processo de build do nosso executável, seguindo boas práticas de desenvolvimento.
+
+### 🔗 [Veja o Workflow Aqui](https://github.com/chaos4455/torrent-file-mover-backuper/blob/main/.github/workflows/build.yaml)
+
+### ⚙️ Estrutura do Workflow
+
+## 🗺️ Diagrama de Fluxo do Processo de Build
+
+### 🔄 Etapas do Workflow
+
+```mermaid
+flowchart TD
+    A[🔍 Checkout Repository] --> B[🐍 Set Up Python]
+    B --> C[⬆️ Upgrade pip]
+    C --> D[📦 Install PyInstaller]
+    D --> E[🛠️ Create Executable]
+    E --> F[📁 Create Program Folder]
+    F --> G[➡️ Move Executable]
+    G --> H[➕ Add Programas Folder Changes]
+    H --> I[👤 Configure Git User]
+    I --> J[📝 Commit Changes]
+    J --> K[🔼 Push Changes]
+    K --> L[📤 Upload Executable]
+    L --> M[✅ Build Complete!]
+
+```yaml
+name: Deploy Py to Exe
+
+on:
+  push:
+    branches:
+      - main  # O workflow é acionado em cada push para a branch principal.
+
+jobs:
+  build:
+    runs-on: windows-latest  # A ação é executada em um ambiente Windows.
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2  # Faz o checkout do repositório.
+
+    - name: Set Up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'  # Define a versão do Python a ser usada.
+
+    - name: Upgrade pip
+      run: |
+        python -m pip install --upgrade pip  # Atualiza o pip para a versão mais recente.
+
+    - name: Install PyInstaller
+      run: |
+        pip install pyinstaller  # Instala o PyInstaller para criar executáveis.
+
+    - name: Create Executable
+      run: |
+        pyinstaller --onefile --windowed --icon=torrent-icon.ico py-torrent-file-mover.py  # Cria um executável único.
+
+    - name: Create Program Folder if Not Exists
+      run: |
+        if (-Not (Test-Path -Path "programas")) { New-Item -ItemType Directory -Path "programas" }  # Cria a pasta 'programas' se não existir.
+
+    - name: Move Executable to Programas Folder
+      run: |
+        move dist\\py-torrent-file-mover.exe programas\\  # Move o executável gerado para a pasta 'programas'.
+
+    - name: Add Programas Folder Changes
+      run: |
+        git add programas  # Adiciona as mudanças na pasta 'programas' ao git.
+
+    - name: Configure Git User
+      run: |
+        git config --local user.email 'github-actions[bot]@users.noreply.github.com'  # Configura o email do bot do GitHub.
+        git config --local user.name 'github-actions[bot]'  # Configura o nome do bot do GitHub.
+
+    - name: Commit Changes
+      run: |
+        git commit -m "Add new version of executável"  # Comita as mudanças realizadas na pasta 'programas'.
+
+    - name: Push Changes
+      run: |
+        git push origin main  # Faz o push das mudanças para a branch principal.
+
+    - name: Upload Executable
+      uses: actions/upload-artifact@v2
+      with:
+        name: python-torrent-file-mover-backup-v01.exe  # Nome do artefato que será enviado.
+        path: programas\\py-torrent-file-mover.exe  # Caminho do executável a ser enviado.
+
+```
+
+
