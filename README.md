@@ -35,7 +35,7 @@ Além do Python, não são necessárias bibliotecas externas, pois utilizamos ap
 
 Você pode baixar a última versão do executável diretamente do repositório. Clique no link abaixo para fazer o download:
 
-[**Download Último Executável**](https://github.com/chaos4455/torrent-file-mover-backuper/releases/latest)
+[**Download Último Executável**]([https://github.com/chaos4455/torrent-file-mover-backuper/releases/latest](https://github.com/chaos4455/torrent-file-mover-backuper/tree/main/programas))
 
 ---
 
