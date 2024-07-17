@@ -25,7 +25,7 @@ jobs:
 
     - name: Convert PNG to ICO
       run: |
-        python -c "from PIL import Image; Image.open('torrent.icon.png').save('torrent.icon.ico')"
+        python -c "from PIL import Image; Image.open('torrent.icon.png').save('torrent-icon.ico')"
 
     - name: Create executável
       run: |
