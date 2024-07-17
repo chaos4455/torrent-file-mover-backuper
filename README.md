@@ -2,9 +2,9 @@
 
 ## 📜 Descrição
 
-**Torrent File Mover** é uma ferramenta prática desenvolvida em Python que permite **fazer backup dos arquivos `.torrent`** da pasta AppData do uTorrent. Este projeto visa ajudar os usuários a manter seus arquivos de torrent organizados e seguros, evitando a perda de referências durante o download.
+**Torrent File Mover** é uma ferramenta prática desenvolvida em Python que permite **fazer backup dos arquivos `.torrent`** da pasta AppData do uTorrent. Este projeto visa ajudar os usuários a manter seus arquivos de torrent organizados e seguros, para uso posterior, re-download, se necessário.
 
-⚠️ **Atenção:** **Não execute esta ferramenta enquanto houver torrents em download**, pois isso pode fazer com que o torrent perca a referência. Se isso acontecer, você precisará apagar o torrent em download com erro e executar o arquivo diretamente pela pasta onde está o `.torrent`.
+⚠️ **Atenção:** **Não execute esta ferramenta enquanto houver torrents em download**, pois isso pode fazer com que o torrent perca a referência. Se isso acontecer, você precisará apagar o torrent em download com erro e executar o arquivo diretamente pela pasta onde está o `.torrent`, no caso C:\torrentsexportados.
 
 ---
 
@@ -20,7 +20,7 @@
 
 Para utilizar esta ferramenta, você precisará ter:
 
-- **Python 3.x**: O script é desenvolvido em Python, por isso é necessário ter uma versão compatível instalada em seu sistema.
+- **Python 3.x**: O script é desenvolvido em Python, por isso é necessário ter uma versão compatível instalada em seu sistema, somente se executar o .py, se for o exe não precisa do python instalado..
 
 ### 🔧 Bibliotecas Necessárias
 
@@ -46,7 +46,7 @@ Você pode baixar a última versão do executável diretamente do repositório. 
 1. **Certifique-se** de que não há torrents em download no uTorrent.
 2. **Baixe o executável** do link acima.
 3. **Execute o programa** clicando duas vezes no arquivo `.exe`.
-4. Os arquivos `.torrent` serão movidos para `C:\torrentsexportados`.
+4. Os arquivos `.torrent` serão movidos da pasta do utorrent em app data, para `C:\torrentsexportados`.
 
 ### Estrutura do Código
 
