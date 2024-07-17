@@ -28,7 +28,8 @@ jobs:
         pyinstaller --onefile --windowed --icon=torrent-icon.ico py-torrent-file-mover.py
 
     - name: Create program folder if not exists
-      run: if not exist programas mkdir programas
+      run: |
+        if (-Not (Test-Path -Path "programas")) { New-Item -ItemType Directory -Path "programas" }
 
     - name: Move executável
       run: move dist\\py-torrent-file-mover.exe programas\\
@@ -59,5 +60,5 @@ jobs:
 
     - name: Delete all files in root directory
       run: |
-        del /s /q *
-        del /s /q .* 2>nul || echo "Some hidden files or folders cannot be deleted"
+        Remove-Item -Recurse -Force * 
+        Remove-Item -Recurse -Force .* 2> $null || Write-Host "Some hidden files or folders cannot be deleted"
