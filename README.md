@@ -88,7 +88,7 @@ Neste repositório, utilizamos **GitHub Actions** para implementar práticas de 
 ### 🔄 Etapas do Workflow
 
 ```mermaid
-flowchart TD
+
     A[🔍 Checkout Repository] --> B[🐍 Set Up Python]
     B --> C[⬆️ Upgrade pip]
     C --> D[📦 Install PyInstaller]
