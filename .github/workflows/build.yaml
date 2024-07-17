@@ -25,7 +25,7 @@ jobs:
 
     - name: Create executável
       run: |
-        pyinstaller --onefile --windowed --icon=torrent.icon.png py-torrent-file-mover.py
+        pyinstaller --onefile --windowed --icon=torrent-icon.png py-torrent-file-mover.py
 
     - name: Create program folder if not exists
       run: mkdir programas
