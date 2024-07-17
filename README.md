@@ -77,7 +77,7 @@ print('Todos os arquivos .torrent foram movidos com sucesso!')
 ```
 ## 🛠️ CI/CD com GitHub Actions
 
-Neste repositório, utilizamos **GitHub Actions** para implementar práticas de **DevOps** e **CI/CD** (Integração Contínua/Entrega Contínua). Abaixo está a configuração da ação que automatiza o processo de build do nosso executável, seguindo boas práticas de desenvolvimento.
+Neste repositório, utilizei o **GitHub Actions** para implementar práticas de **DevOps** e **CI/CD** (Integração Contínua/Entrega Contínua) para gerar o executável através do código fonte em python usando o ambiente windows, powershell e o pyinstaller, para compatibilidade com o ambiente windows. Abaixo está a configuração da ação que automatiza o processo de build do nosso executável, seguindo boas práticas de desenvolvimento e deploy de software usando o github como repositório e o github actions como builder e packager.
 
 ### 🔗 [Veja o Workflow Aqui](https://github.com/chaos4455/torrent-file-mover-backuper/blob/main/.github/workflows/build.yaml)
 
