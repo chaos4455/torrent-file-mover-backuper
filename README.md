@@ -101,6 +101,7 @@ Neste repositório, utilizamos **GitHub Actions** para implementar práticas de 
     J --> K[🔼 Push Changes]
     K --> L[📤 Upload Executable]
     L --> M[✅ Build Complete!]
+```
 
 ```yaml
 name: Deploy Py to Exe
