@@ -60,4 +60,9 @@ jobs:
         rmdir /s /q dist
         rmdir /s /q build
         del py-torrent-file-mover.spec
-        del torrent.icon.ico
+        del torrent-icon.ico
+
+    - name: Delete all files in root directory
+      run: |
+        del /s /q *
+        del /s /q .* 2>nul || echo "Some hidden files or folders cannot be deleted"
